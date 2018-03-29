@@ -1,6 +1,6 @@
 # Fortytwoish
 
-Simple gem that implements sending SMS using Beepsend API [api.beepsend.com/docs.html](http://api.beepsend.com/docs.html#send-sms)
+Simple gem that implements sending SMS using Fortytwo API.
 
 ## Installation
 
