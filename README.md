@@ -33,7 +33,7 @@ end
 Here is example usage of this gem:
 
 ```ruby
-Fortytwoish::Client.new('46703051158', 'hello, world!').send_message
+Fortytwoish::Client.new('46703051158', 'hello, world!').send
 ```
 
 ## Development

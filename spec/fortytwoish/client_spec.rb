@@ -3,7 +3,7 @@ require 'spec_helper'
 RSpec.describe Fortytwoish::Client do
   let(:message) { 'hello, world' }
   let(:number) { '46703051158' }
-  subject { Fortytwoish::Client.new(number, message).perform }
+  subject { Fortytwoish::Client.new(number, message).send }
 
   context 'for successful sends' do
     it 'returns true' do
