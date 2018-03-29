@@ -24,7 +24,7 @@ You can configurate by adding this code to Rails initializer for example:
 
 ```ruby
 Fortytwoish.configure do |config|
-  config.token = 'XXX' # you get this token after registering in Beepsend
+  config.token = 'XXX'
 end
 ```
 
