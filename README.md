@@ -1,8 +1,6 @@
-# Fortytwoish
+# Beepsend
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/fortytwoish`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Simple gem that implements sending SMS using Beepsend API [api.beepsend.com/docs.html](http://api.beepsend.com/docs.html#send-sms)
 
 ## Installation
 
@@ -20,9 +18,23 @@ Or install it yourself as:
 
     $ gem install fortytwoish
 
+## Configuaration
+
+You can configurate by adding this code to Rails initializer for example:
+
+```ruby
+Fortytwoish.configure do |config|
+  config.token = 'XXX' # you get this token after registering in Beepsend
+end
+```
+
 ## Usage
 
-TODO: Write usage instructions here
+Here is example usage of this gem:
+
+```ruby
+Fortytwoish::Client.new('46703051158', 'hello, world!').send_message
+```
 
 ## Development
 
@@ -32,8 +44,8 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/fortytwoish.
+Bug reports and pull requests are welcome on GitHub at https://github.com/RushPlay/fortytwoiiish.
 
 ## License
 
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+GNU GPLv3
