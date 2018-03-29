@@ -8,7 +8,7 @@ module Fortytwoish
       @number = number
     end
 
-    def perform
+    def send
       response = send_message
 
       raise FortytwoRuntimeError, "Fortytwo error: #{response.message}" unless response.code == '200'
