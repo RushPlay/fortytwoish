@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.summary       = %q{For sending SMS using Fortytwo API}
   spec.description   = %q{Simple gem that implements sending SMS using Fortytwo API.}
   spec.homepage      = 'https://github.com/rushplay/fortytwoish'
-  spec.license       = 'GPL'
+  spec.license       = 'GPL-3.0-or-later'
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
     f.match(%r{^(test|spec|features)/})
