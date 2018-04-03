@@ -10,9 +10,7 @@ module Fortytwoish
 
     def send
       response = send_message
-
-      raise FortytwoRuntimeError, "Fortytwo error: #{response.message}" unless response.code == '200'
-      true
+      response.code
     end
 
     private

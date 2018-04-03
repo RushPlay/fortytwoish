@@ -3,8 +3,6 @@ require 'fortytwoish/client'
 require 'fortytwoish/configuration'
 
 module Fortytwoish
-  class FortytwoRuntimeError < StandardError; end
-
   def self.configuration
     @configuration ||= Configuration.new
   end
