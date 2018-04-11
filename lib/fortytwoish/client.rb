@@ -23,13 +23,18 @@ module Fortytwoish
 
     def send_message
       uri = URI 'https://rest.fortytwo.com/1/im'
+      request = build_request(uri)
+      Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
+        http.request request
+      end
+    end
+
+    def build_request(uri)
       request = Net::HTTP::Post.new(uri.path)
       request['Content-Type'] = 'application/json; charset=utf-8'
       request['Authorization'] = "Token #{configuration.token}"
       request.body = body
-      Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
-        http.request request
-      end
+      request
     end
 
     def body
