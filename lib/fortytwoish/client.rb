@@ -5,7 +5,7 @@ module Fortytwoish
   class Client
     def initialize(numbers, message)
       @message = message
-      @numbers = numbers
+      @numbers = Array(numbers)
     end
 
     def send
@@ -15,12 +15,7 @@ module Fortytwoish
 
     private
 
-    attr_reader :message
-
-    def numbers
-      return [@numbers] unless @numbers.kind_of? Array
-      @numbers
-    end
+    attr_reader :message, :numbers
 
     def configuration
       @configuration ||= Fortytwoish.configuration
