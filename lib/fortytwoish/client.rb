@@ -3,9 +3,9 @@ require 'json'
 
 module Fortytwoish
   class Client
-    def initialize(number, message)
+    def initialize(numbers, message)
       @message = message
-      @number = number
+      @numbers = Array(numbers)
     end
 
     def send
@@ -15,7 +15,7 @@ module Fortytwoish
 
     private
 
-    attr_reader :message, :number
+    attr_reader :message, :numbers
 
     def configuration
       @configuration ||= Fortytwoish.configuration
@@ -39,9 +39,7 @@ module Fortytwoish
 
     def body
       {
-        destinations: [
-          number: number
-        ],
+        destinations: numbers.map { |number| { number: number } },
         'sms_content': { message: message }
       }.to_json
     end
