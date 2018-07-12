@@ -40,7 +40,10 @@ module Fortytwoish
     def body
       {
         destinations: numbers.map { |number| { number: number } },
-        'sms_content': { message: message }
+        sms_content: {
+          message: message,
+          encoding: configuration.encoding
+        }
       }.to_json
     end
   end

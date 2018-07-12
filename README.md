@@ -25,6 +25,7 @@ You can configurate by adding this code to Rails initializer for example:
 ```ruby
 Fortytwoish.configure do |config|
   config.token = 'XXX'
+  config.encoding = 'GSM7' # GSM7, UCS2, BINARY are available, GSM7 is default
 end
 ```
 
@@ -33,7 +34,7 @@ end
 Here is example usage of this gem:
 
 ```ruby
-Fortytwoish::Client.new('46703051158', 'hello, world!').send
+Fortytwoish::Client.new('15415553010', 'hello, world!').send
 ```
 
 ## Development
@@ -44,7 +45,13 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/RushPlay/fortytwoiiish.
+Bug reports and pull requests are welcome on GitHub at https://github.com/RushPlay/fortytwoish.
+
+## Release notes
+
+### 0.3.0
+
+* Configurable encoding added
 
 ## License
 
