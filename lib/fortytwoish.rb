@@ -1,18 +1,10 @@
 require 'fortytwoish/version'
 require 'fortytwoish/client'
-require 'fortytwoish/configuration'
 
 module Fortytwoish
-  def self.configuration
-    @configuration ||= Configuration.new
-  end
-
-  def self.reset_configuration
-    @configuration = nil
-  end
-
-  def self.configure
-    self.configuration ||= Configuration.new
-    yield(configuration)
-  end
+  ALLOWED_ENCODINGS = [
+    GSM7 = 'GSM7',
+    UCS2 = 'UCS2',
+    BINARY = 'BINARY'
+  ]
 end

@@ -18,15 +18,15 @@ Or install it yourself as:
 
     $ gem install fortytwoish
 
-## Configuaration
+## Client
 
-You can configurate by adding this code to Rails initializer for example:
+You can create and configurate a client:
 
 ```ruby
-Fortytwoish.configure do |config|
-  config.token = 'XXX'
-  config.encoding = 'GSM7' # GSM7, UCS2, BINARY are available, GSM7 is default
-end
+client = Fortytwoish::Client.new(
+  token: 'XXX',
+  encoding: 'GSM7' # GSM7, UCS2, BINARY are available, GSM7 is default
+)
 ```
 
 ## Usage
@@ -34,8 +34,25 @@ end
 Here is example usage of this gem:
 
 ```ruby
-Fortytwoish::Client.new('15415553010', 'hello, world!').send
+if client.send('15415553010', 'hello, world!') != '200' # send returns '200' in case of success
+  puts client.response_body # response_body contains detail about failed sending
+end
 ```
+
+You can send a message to multiple numbers at the same time:
+
+```ruby
+numbers = %w[
+  15415553010
+  15415553011
+  15415553012
+]
+if client.send(numbers, 'hello, world!') != '200' # send returns '200' in case of success
+  puts client.response_body # response_body contains detail about failed sending
+end
+```
+
+*Note:* In case of multiple numbers sendout the results will be `fail` if at least one message failed.
 
 ## Development
 
@@ -46,12 +63,6 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/RushPlay/fortytwoish.
-
-## Release notes
-
-### 0.3.0
-
-* Configurable encoding added
 
 ## License
 
