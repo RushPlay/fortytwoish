@@ -3,18 +3,7 @@ require 'spec_helper'
 RSpec.describe Fortytwoish::Client do
   let(:message) { 'hello, world' }
   let(:number) { '15415553010' }
-  subject(:client) { described_class.new(number, message) }
-
-  around do |example|
-    Fortytwoish.configure do |config|
-      config.token = 'TESTTOKEN'
-      config.encoding = Fortytwoish::UCS2
-    end
-
-    example.run
-
-    Fortytwoish.reset_configuration
-  end
+  subject(:client) { described_class.new(token: 'TESTTOKEN', encoding: Fortytwoish::UCS2) }
 
   context 'for successful sends' do
     before do
@@ -31,9 +20,9 @@ RSpec.describe Fortytwoish::Client do
         ).to_return(status: 200, body: 'OK')
     end
 
-    it { expect(client.send).to eq '200' }
+    it { expect(client.send([number], message)).to eq '200' }
     it 'assigns correct response_body' do
-      client.send
+      client.send(number, message)
       expect(client.response_body).to eq('OK')
     end
   end
@@ -53,15 +42,15 @@ RSpec.describe Fortytwoish::Client do
         ).to_return(status: 400, body: 'ERR')
     end
 
-    it { expect(client.send).to eq '400' }
+    it { expect(client.send(number, message)).to eq '400' }
     it 'assigns correct response_body' do
-      client.send
+      client.send([number], message)
       expect(client.response_body).to eq('ERR')
     end
   end
 
   context 'with several numbers' do
-    let(:number) { ['15415553010', '15415553011'] }
+    let(:numbers) { ['15415553010', '15415553011'] }
 
     before do
       message_body = <<~JSON.strip
@@ -77,9 +66,9 @@ RSpec.describe Fortytwoish::Client do
         ).to_return(status: 200, body: 'OK')
     end
 
-    it { expect(client.send).to eq '200' }
+    it { expect(client.send(numbers, message)).to eq '200' }
     it 'assigns correct response_body' do
-      client.send
+      client.send(numbers, message)
       expect(client.response_body).to eq('OK')
     end
   end
