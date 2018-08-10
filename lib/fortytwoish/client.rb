@@ -3,6 +3,8 @@ require 'json'
 
 module Fortytwoish
   class Client
+    attr_reader :response_body
+
     def initialize(numbers, message)
       @message = message
       @numbers = Array(numbers)
@@ -10,6 +12,7 @@ module Fortytwoish
 
     def send
       response = send_message
+      @response_body = response.body
       response.code
     end
 

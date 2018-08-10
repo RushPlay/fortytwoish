@@ -3,7 +3,7 @@ require 'spec_helper'
 RSpec.describe Fortytwoish::Client do
   let(:message) { 'hello, world' }
   let(:number) { '15415553010' }
-  subject { Fortytwoish::Client.new(number, message).send }
+  subject(:client) { described_class.new(number, message) }
 
   around do |example|
     Fortytwoish.configure do |config|
@@ -28,10 +28,14 @@ RSpec.describe Fortytwoish::Client do
             'Authorization': 'Token TESTTOKEN',
             'Content-Type': 'application/json; charset=utf-8'
           }
-        ).to_return(status: 200)
+        ).to_return(status: 200, body: 'OK')
     end
 
-    it { is_expected.to eq '200' }
+    it { expect(client.send).to eq '200' }
+    it 'assigns correct response_body' do
+      client.send
+      expect(client.response_body).to eq('OK')
+    end
   end
 
   context 'when the server complains' do
@@ -46,10 +50,14 @@ RSpec.describe Fortytwoish::Client do
             'Authorization': 'Token TESTTOKEN',
             'Content-Type': 'application/json; charset=utf-8'
           }
-        ).to_return(status: 400)
+        ).to_return(status: 400, body: 'ERR')
     end
 
-    it { is_expected.to eq '400' }
+    it { expect(client.send).to eq '400' }
+    it 'assigns correct response_body' do
+      client.send
+      expect(client.response_body).to eq('ERR')
+    end
   end
 
   context 'with several numbers' do
@@ -66,9 +74,13 @@ RSpec.describe Fortytwoish::Client do
             'Authorization': 'Token TESTTOKEN',
             'Content-Type': 'application/json; charset=utf-8'
           }
-        ).to_return(status: 200)
+        ).to_return(status: 200, body: 'OK')
     end
 
-    it { is_expected.to eq '200' }
+    it { expect(client.send).to eq '200' }
+    it 'assigns correct response_body' do
+      client.send
+      expect(client.response_body).to eq('OK')
+    end
   end
 end

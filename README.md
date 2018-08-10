@@ -34,7 +34,10 @@ end
 Here is example usage of this gem:
 
 ```ruby
-Fortytwoish::Client.new('15415553010', 'hello, world!').send
+client = Fortytwoish::Client.new('15415553010', 'hello, world!')
+unless client.send == '200' # send returns '200' in case of success
+  puts client.response_body # response_body contains detail about failed sending
+end
 ```
 
 ## Development
@@ -46,12 +49,6 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/RushPlay/fortytwoish.
-
-## Release notes
-
-### 0.3.0
-
-* Configurable encoding added
 
 ## License
 
